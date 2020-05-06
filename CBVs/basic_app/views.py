@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render 
+from django.urls import reverse, reverse_lazy
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from basic_app import models
 # Create your views here.
@@ -16,5 +17,13 @@ class SchoolDetailView(DetailView):
     # In Detail View it just return lowerCaseModelName as Context_Dictionary school. You can edit in same way.
 
 class SchoolCreateView(CreateView):
-    fields = ('name','principal','location')
+    fields = ('name','principal','location',)
     model = models.School
+
+class SchoolUpdateView(UpdateView):
+    fields = ('principal',)
+    model = models.School 
+
+class SchoolDeleteView(DeleteView):
+    model = models.School
+    success_url = reverse_lazy('basic_app:list')
